@@ -1,9 +1,15 @@
 package com.mktech.twistanalytics.controllers
 
-/**
- * Place here class purpose.
- *
- * @author Kirill
- * @since 17.04.2024
- */ class LoginController {
+import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+
+@Controller
+@RequestMapping("/login")
+class LoginController {
+
+    @GetMapping
+    fun getLoginPage(): String {
+        return "login"
+    }
 }

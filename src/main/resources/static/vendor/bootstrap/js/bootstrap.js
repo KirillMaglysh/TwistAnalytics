@@ -1105,7 +1105,7 @@ var Collapse = function ($) {
       this._isTransitioning = false;
       this._element = element;
       this._config = this._getConfig(config);
-      this._triggerArray = $.makeArray($('[data-toggle="collapse"][href="#' + element.id + '"],' + ('[data-toggle="collapse"][data-target="#' + element.id + '"]')));
+      this._triggerArray = $.makeArray($('[data-toggle="collapse"][href="static/#' + element.id + '"],' + ('[data-toggle="collapse"][data-target="#' + element.id + '"]')));
       var tabToggles = $(Selector.DATA_TOGGLE);
       for (var i = 0; i < tabToggles.length; i++) {
         var elem = tabToggles[i];
@@ -2615,7 +2615,7 @@ var ScrollSpy = function ($) {
 
       var queries = this._selector.split(',');
       queries = queries.map(function (selector) {
-        return selector + '[data-target="' + target + '"],' + (selector + '[href="' + target + '"]');
+        return selector + '[data-target="' + target + '"],' + (selector + '[href="static/' + target + '"]');
       });
 
       var $link = $(queries.join(','));

@@ -1,9 +1,11 @@
 package com.mktech.twistanalytics.controllers
 
-/**
- * Place here class purpose.
- *
- * @author Kirill
- * @since 17.04.2024
- */ class HomeController {
+import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.GetMapping
+
+@Controller
+class HomeController {
+
+    @GetMapping("/")
+    fun getHome(): String = "home"
 }
