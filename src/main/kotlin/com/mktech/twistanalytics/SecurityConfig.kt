@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -14,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 class SecurityConfig {
     private final val PUBLIC_MATCHERS: Array<String> =
-        arrayOf("/js/**", "/css/**", "/fonts/**", "/images/**", "/vendor/**")
+        arrayOf("/stat_login/**")
 
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
@@ -28,7 +29,14 @@ class SecurityConfig {
             .formLogin { formLogin ->
                 setupLogin(formLogin)
             }
+            .logout { logout ->
+                setupLogout(logout)
+            }
             .build()
+    }
+
+    private fun setupLogout(logout: LogoutConfigurer<HttpSecurity>) {
+        logout.logoutSuccessUrl("/login")
     }
 
     private fun setupAuth(auth: AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry) {
