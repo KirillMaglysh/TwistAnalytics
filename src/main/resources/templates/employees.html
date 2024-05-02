@@ -4,49 +4,63 @@
       layout:decorate="~{/lk_layout.html}">
 <head>
     <title>Page name</title>
-    <script>
-        function sortByHeader(param, curHeader, isAsc) {
-            let isAscNow = (param === curHeader && isAsc === "true") ? "false" : "true";
-            window.location.href = `/employees?limit=8&offset=0&sortParam=${param}&isAsc=${isAscNow}`
-        }
-    </script>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{stat_employees/css/style.css}">
+    <script th:src="@{stat_employees/js/main.js}"></script>
 </head>
+
 <body>
 <section layout:fragment="content">
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-6 text-center mb-5">
+                <div class="col-md-6 text-center mb-4">
                     <h2 class="heading-section">Сотрудники</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="table-wrap">
-                        <table class="table">
-                            <thead class="thead-primary">
-                            <tr>
-                                <th
-                                        th:each="tableProperty: ${tableProperties}"
-                                        th:text="${tableProperty.ruName}"
-                                        th:attr="onclick=|sortByHeader('${tableProperty.enName}', '${properties.sortParam}', '${properties.isAsc}')|"
-                                        style="cursor: pointer"
-                                >
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <!--/*@thymesVar id="employees" type="com.mktech.twistanalytics.db.entities.Employee.EmployeeWoPsw"*/-->
-                            <tr th:each="employee: ${employees}">
-                                <th scope="row" th:text="${employee.id}">-</th>
-                                <td th:text="${employee.name}">-</td>
-                                <td th:text="${employee.surname}">-</td>
-                                <td th:text="${employee.email}">-</td>
-                                <td th:text="${employee.phone}">-</td>
-                                <td>Босс</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <table class="table">
+                        <thead class="thead-primary">
+                        <tr>
+                            <th
+                                    th:each="tableProperty: ${tableProperties}"
+                                    th:text="${tableProperty.ruName}"
+                                    th:attr="onclick=|sortByHeader('${tableProperty.enName}', '${properties.sortParam}', '${properties.isAsc}')|"
+                                    style="cursor: pointer"
+                            >
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--/*@thymesVar id="employees" type="com.mktech.twistanalytics.db.entities.Employee.EmployeeWoPsw"*/-->
+                        <tr th:each="employee: ${employees}"
+                            th:attr="onclick=|loadProfile('${employee.id}')|">
+                            <th scope="row" th:text="${employee.id}" href="/profile">-</th>
+                            <td th:text="${employee.name}">-</td>
+                            <td th:text="${employee.surname}">-</td>
+                            <td th:text="${employee.email}">-</td>
+                            <td th:text="${employee.phone}">-</td>
+                            <td th:text="${employee.role}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="rewind-buttons">
+                        <button class="rewind-button" type="button" style="margin-right: 50px; background-color: #57b846"
+                                th:attr="onclick=|loadProfile('-1')|">
+                            <i class="fa fa-plus"></i>
+                        </button>
+
+                        <button class="rewind-button" type="button"
+                                th:attr="onclick=|loadPrevPage('${properties.sortParam}', '${properties.isAsc}', '${properties.limit}', '${properties.offset}')|">
+                            <i class="fa fa-arrow-left"></i>
+                        </button>
+                        <button class="rewind-button" type="button"
+                                th:attr="onclick=|loadNextPage('${properties.sortParam}', '${properties.isAsc}', '${properties.limit}', '${properties.offset}')|">
+                            <i class="fa fa-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
             </div>

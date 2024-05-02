@@ -30,8 +30,17 @@ class Employee(
 
     val role: Role? = null
 ) {
-    enum class Role {
-        COACH, ADMIN, GOD
+    enum class Role(private val numType: Int) {
+        COACH(0), ADMIN(1), BOSS(2);
+
+        override fun toString(): String {
+            return when (numType) {
+                0 -> "Тренер"
+                1 -> "Админ"
+                2 -> "Босс"
+                else -> "Undefined"
+            }
+        }
     }
 
     class EmployeeWoPsw(
