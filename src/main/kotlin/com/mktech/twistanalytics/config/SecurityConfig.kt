@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain
 @Configuration
 class SecurityConfig {
     private final val PUBLIC_MATCHERS: Array<String> =
-        arrayOf("/stat_login/**")
+        arrayOf("/stat_login/**", "/stat_errors/**")
 
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
