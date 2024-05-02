@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ru"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>Sidebar 09</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="icon" type="image/png" th:href="@{/stat_login/images/icons/favicon.ico}"/>
+
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{stat_skeleton/css/style.css}">
+</head>
+<body>
+
+
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            </button>
+        </div>
+        <div class="img bg-wrap text-center py-4" style="background-color: #6e0096">
+            <div class="user-logo">
+                <h3>Ann Prokhorova</h3>
+            </div>
+        </div>
+        <!--/*@thymesVar id="url_suf" type="java.lang.String"*/-->
+        <ul class="list-unstyled components mb-5">
+            <li th:attr="class=${url_suf == 'journal' ? 'active' : ''}">
+                <a href="#"><span class="fa fa-address-book mr-3"></span> Журнал</a>
+            </li>
+            <li th:attr="class=${url_suf == 'attendance' ? 'active' : ''}">
+                <a href="#"><span class="fa fa-pencil mr-3 notif"></span> Посещаемость</a>
+            </li>
+            <li th:attr="class=${url_suf == 'groups' ? 'active' : ''}">
+                <a href="#"><span class="fa fa-users mr-3"></span> Группы</a>
+            </li>
+            <li th:attr="class=${url_suf == 'students' ? 'active' : ''}">
+                <a href="#"><span class="fa fa-user mr-3"></span> Ученики</a>
+            </li>
+            <li th:attr="class=${url_suf == 'employees' ? 'active' : ''}">
+                <a href="/employees"><span class="fa fa-user-secret mr-3"></span>Сотрудники</a>
+            </li>
+            <li th:attr="class=${url_suf == 'profile' ? 'active' : ''}">
+                <a href="#"><span class="fa fa-user-o mr-3"></span> Профиль</a>
+            </li>
+
+            <li th:attr="class=${url_suf == 'logout' ? 'active' : ''}">
+                <a href="#" onclick="document.forms['logout_form'].submit()">
+                    <span class="fa fa-sign-out mr-3"></span>
+                    Выйти</a>
+            </li>
+
+            <form id="logout_form" action="/logout" method="post">
+                <input th:type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            </form>
+        </ul>
+
+    </nav>
+
+    <!-- Page Content  -->
+    <section layout:fragment="content" id="content" class="p-4 p-md-5 pt-5">
+
+    </section>
+</div>
+
+<script th:src="@{stat_skeleton/js/jquery.min.js}"></script>
+<script th:src="@{stat_skeleton/js/popper.js}"></script>
+<script th:src="@{stat_skeleton/js/bootstrap.min.js}"></script>
+<script th:src="@{stat_skeleton/js/main.js}"></script>
+</body>
+</html>
+</html>

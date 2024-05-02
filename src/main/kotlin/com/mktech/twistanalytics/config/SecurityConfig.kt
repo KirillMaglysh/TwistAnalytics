@@ -1,4 +1,4 @@
-package com.mktech.twistanalytics
+package com.mktech.twistanalytics.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

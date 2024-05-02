@@ -1,7 +1,8 @@
 package com.mktech.twistanalytics.services
 
 import com.mktech.twistanalytics.db.entities.Employee
+import com.mktech.twistanalytics.requests.EmployeesRequest
 
 interface EmployeeService {
-    fun getEmployeesWoPsw(limit: Int, offset: Int): List<Employee.EmployeeWoPsw>
+    fun getEmployeesWoPsw(request: EmployeesRequest): List<Employee.EmployeeWoPsw>
 }
